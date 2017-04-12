@@ -40,10 +40,12 @@ promiseLoadStorage.then(function(value) {
     },
     methods: {
       onItemClick: function(index) {
+        this.currentConverterId = index;
         chrome.storage.sync.set({currentConverterId: index});
       },
       onActivateButtonClick: function() {
         this.activated = !this.activated;
+        chrome.storage.sync.set({activated: this.activated});
       }
     },
     watch: {
