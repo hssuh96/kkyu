@@ -6,18 +6,10 @@ var promiseLoadStorage = new Promise(function(resolve, reject) {
     if (Object.getOwnPropertyNames(obj).length === 0) {
       console.log('initializing storage');
       chrome.storage.sync.set(defaultStorage);
-      storageValue = {
-        activated: defaultStorage.activated,
-        currentConverterIndex: defaultStorage.currentConverterId,
-        converters: defaultStorage.converters.slice()
-      };
+      storageValue = $.extend(true, {}, defaultStorage);
     }
     else {
-      storageValue = {
-        activated: obj.activated,
-        currentConverterIndex: obj.currentConverterId,
-        converters: obj.converters.slice()
-      };
+      storageValue = $.extend(true, {}, obj);
     }
     resolve("successfully loaded storage value");
   });
@@ -30,7 +22,7 @@ promiseLoadStorage.then(function(value) {
       options: {
       },
       activated: storageValue.activated,
-      currentConverterId: storageValue.currentConverterId,
+      selectedConverterIndex: storageValue.selectedConverterIndex,
       converters: storageValue.converters
     },
     computed: {
@@ -40,8 +32,8 @@ promiseLoadStorage.then(function(value) {
     },
     methods: {
       onItemClick: function(index) {
-        this.currentConverterId = index;
-        chrome.storage.sync.set({currentConverterId: index});
+        this.selectedConverterIndex = index;
+        chrome.storage.sync.set({selectedConverterIndex: index});
       },
       onActivateButtonClick: function() {
         this.activated = !this.activated;
