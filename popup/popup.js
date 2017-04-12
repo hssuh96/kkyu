@@ -33,14 +33,22 @@ promiseLoadStorage.then(function(value) {
       currentConverterId: storageValue.currentConverterId,
       converters: storageValue.converters
     },
+    computed: {
+      activateButtonText: function() {
+        return (this.activated) ? "사용 중지" : "사용";
+      }
+    },
     methods: {
       onItemClick: function(index) {
-        console.log(index);
+        chrome.storage.sync.set({currentConverterId: index});
+      },
+      onActivateButtonClick: function() {
+        this.activated = !this.activated;
       }
     },
     watch: {
       converters: function(newConverters) {
-        console.log(chrome.storage.sync.set({converters: newConverters}));
+        chrome.storage.sync.set({converters: newConverters});
       }
     }
   });
