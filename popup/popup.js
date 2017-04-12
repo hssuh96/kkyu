@@ -43,6 +43,7 @@ promiseLoadStorage.then(function(value) {
     watch: {
       converters: function(newConverters) {
         chrome.storage.sync.set({converters: newConverters});
+        // TODO : 위치 바뀐 element에 현재 converter가 포함되어 있다면
       }
     }
   });

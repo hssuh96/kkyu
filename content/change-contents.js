@@ -1,7 +1,7 @@
 console.log('loading content scripts : change-contents');
 
 function setConverter(converterFunc) {
-  console.log('setting string converter');
+  console.log('setting string converter : ' + converterFunc);
 
   clearConverter();
 
@@ -18,6 +18,8 @@ function setConverter(converterFunc) {
   document.arrive(".mtm p", {existing: true}, function() {
     this.innerHTML = func(this.innerHTML);
   });
+
+  console.log('set string converter');
 }
 
 function clearConverter() {
@@ -36,6 +38,7 @@ chrome.storage.sync.get(function(obj) {
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
+  console.log('storage onChanged Listener triggered');
   if (changes['activated']) {
     if (changes['activated'].newValue) {
       setConverter(converterFunc);
@@ -47,7 +50,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   else if (changes['selectedConverterIndex']) {
     chrome.storage.sync.get(function(obj) {
       converterFunc = obj.converters[obj.selectedConverterIndex].func;
-      setConverter(converterFunc);
+      if (obj.activated) {
+        setConverter(converterFunc);
+      }
     });
   }
 });
