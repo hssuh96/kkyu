@@ -6,7 +6,7 @@
 <body>
 <div id="app">
   <draggable v-model="converters" :options="options">
-    <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">{{converter.name}}</button>
+    <button type="button" v-for="(converter, index) in converters" v-on:click="onItemClick(index)">{{converter.name}}</button>
   </draggable>
 </div>
 <script src="../libs/vue.js"></script>

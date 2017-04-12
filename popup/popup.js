@@ -34,8 +34,13 @@ promiseLoadStorage.then(function(value) {
       converters: storageValue.converters
     },
     methods: {
-      onItemClick: function(converter) {
-        console.log(converter.func)
+      onItemClick: function(index) {
+        console.log(index);
+      }
+    },
+    watch: {
+      converters: function(newConverters) {
+        console.log(chrome.storage.sync.set({converters: newConverters}));
       }
     }
   });
