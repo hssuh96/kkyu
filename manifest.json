@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "뀨!",
+  "version": "0.1.0",
+
+  "background": {
+    "scripts": ["default_storage.js", "background/background.js"],
+    "persistent": false
+  },
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup/popup.html"
+  },
+
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "*://www.facebook.com/*",
+    "storage"
+  ],
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

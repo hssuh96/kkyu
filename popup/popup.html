@@ -1,0 +1,18 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+<div id="app">
+  <draggable v-model="converters" :options="options">
+    <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">{{converter.name}}</button>
+  </draggable>
+</div>
+<script src="../libs/vue.js"></script>
+<script src="../libs/Sortable.min.js"></script>
+<script src="../libs/vuedraggable.min.js"></script>
+<script src="../default_storage.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
