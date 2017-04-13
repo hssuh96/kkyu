@@ -64,7 +64,7 @@ promiseLoadStorage.then(function(value) {
     },
     computed: {
       activateButtonText: function() {
-        return (this.activated) ? "사용 중지" : "사용";
+        return (this.activated) ? "사용 중지" : "다시 사용";
       }
     },
     methods: {
