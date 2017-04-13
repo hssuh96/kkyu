@@ -9,6 +9,8 @@ var promiseLoadStorage = new Promise(function(resolve, reject) {
       storageValue = $.extend(true, {}, defaultStorage);
     }
     else {
+      console.log('load data from storage');
+      console.log(obj);
       storageValue = $.extend(true, {}, obj);
     }
     resolve("successfully loaded storage value");
@@ -69,24 +71,34 @@ promiseLoadStorage.then(function(value) {
     },
     methods: {
       onItemClick: function(converter) {
-        this.selectedConverter = $.extend(true, {}, converter);
-        chrome.storage.sync.set({selectedConverter: this.selectedConverter});
+        this.selectedConverter = JSON.parse(JSON.stringify(converter));
       },
       deleteItem: function(index) {
-        this.converters.splice(index, 1);
-        chrome.storage.sync.set({converters: this.converters});
+        let newConverters = JSON.parse(JSON.stringify(this.converters));
+        newConverters.splice(index, 1);
+        this.converters = newConverters;
       },
       onActivateButtonClick: function() {
         this.activated = !this.activated;
-        chrome.storage.sync.set({activated: this.activated});
-      },
-      onMove: function(evt, originalEvent) {
-        chrome.storage.sync.set({converters: this.converters});
       },
       addConverter: function(converter) {
-        console.log('add item: ' + converter.func);
-        this.converters.push($.extend(true, {}, converter));
-        chrome.storage.sync.set({converters: this.converters});
+        let newConverters = JSON.parse(JSON.stringify(this.converters));
+        newConverters.push(JSON.parse(JSON.stringify(converter)));
+        this.converters = newConverters;
+      }
+    },
+    watch: {
+      activated: function(newActivated) {
+        console.log('activated changed. syncing with storage');
+        chrome.storage.sync.set({activated: newActivated});
+      },
+      selectedConverter: function(newSelectedConverter) {
+        console.log('selectedConverter changed. syncing with storage');
+        chrome.storage.sync.set({selectedConverter: newSelectedConverter});
+      },
+      converters: function(newConverters) {
+        console.log('converters changed. syncing with storage');
+        chrome.storage.sync.set({converters: newConverters});
       }
     }
   });

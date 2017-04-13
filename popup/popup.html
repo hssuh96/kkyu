@@ -20,7 +20,7 @@
   <div id="app">
     <span>For debugging: {{selectedConverter.name}}</span>
     <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
-    <draggable v-model="converters" :options="options" :move="onMove">
+    <draggable v-model="converters" :options="options">
       <div class="converter-item" v-for="(converter, index) in converters">
         <button type="button" v-on:click="onItemClick(converter)" style="width:100px;">{{converter.name}}</button>
         <button type="button" v-on:click="deleteItem(index)" style="color:red; width:40px;">삭제</button>
