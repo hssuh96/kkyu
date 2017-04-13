@@ -22,7 +22,7 @@ promiseLoadStorage.then(function(value) {
       options: {
       },
       activated: storageValue.activated,
-      selectedConverterIndex: storageValue.selectedConverterIndex,
+      selectedConverter: storageValue.selectedConverter,
       converters: storageValue.converters
     },
     computed: {
@@ -31,19 +31,16 @@ promiseLoadStorage.then(function(value) {
       }
     },
     methods: {
-      onItemClick: function(index) {
-        this.selectedConverterIndex = index;
-        chrome.storage.sync.set({selectedConverterIndex: index});
+      onItemClick: function(converter) {
+        this.selectedConverter = $.extend(true, {}, converter);;
+        chrome.storage.sync.set({selectedConverter: this.selectedConverter});
       },
       onActivateButtonClick: function() {
         this.activated = !this.activated;
         chrome.storage.sync.set({activated: this.activated});
-      }
-    },
-    watch: {
-      converters: function(newConverters) {
-        chrome.storage.sync.set({converters: newConverters});
-        // TODO : 위치 바뀐 element에 현재 converter가 포함되어 있다면
+      },
+      onMove: function(evt, originalEvent) {
+        chrome.storage.sync.set({converters: this.converters});
       }
     }
   });

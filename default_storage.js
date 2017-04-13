@@ -15,7 +15,7 @@ converter3 = {
 
 var defaultStorage = {
   activated: true,
-  selectedConverterIndex: 0,
+  selectedConverter: converter1,
   converters: [
     converter1,
     converter2,

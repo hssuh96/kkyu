@@ -5,10 +5,10 @@
 </head>
 <body>
 <div id="app">
-  <span>For debugging: {{selectedConverterIndex}}</span>
+  <span>For debugging: {{selectedConverter.name}}</span>
   <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
-  <draggable v-model="converters" :options="options">
-    <button type="button" v-for="(converter, index) in converters" v-on:click="onItemClick(index)">{{converter.name}}</button>
+  <draggable v-model="converters" :options="options" :move="onMove">
+    <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">{{converter.name}}</button>
   </draggable>
 </div>
 <script src="../libs/jquery-3.1.1.min.js"></script>

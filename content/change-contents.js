@@ -1,25 +1,30 @@
 console.log('loading content scripts : change-contents');
 
-function setConverter(converterFunc) {
-  console.log('setting string converter : ' + converterFunc);
+var objectActivated = false;
+var converterFunc = (str) => (str);
 
+function setConverter() {
   clearConverter();
 
-  eval('var func = ' + converterFunc);
+  if (objectActivated) {
+    console.log('setting string converter : ' + converterFunc);
 
-  document.arrive(".UFICommentBody", {existing: true}, function() {
-    this.innerHTML = func(this.innerHTML);
-  });
+    eval('var func = ' + converterFunc);
 
-  document.arrive(".userContent p", {existing: true}, function() {
-    this.innerHTML = func(this.innerHTML);
-  });
+    document.arrive(".UFICommentBody", {existing: true}, function() {
+      this.innerHTML = func(this.innerHTML);
+    });
 
-  document.arrive(".mtm p", {existing: true}, function() {
-    this.innerHTML = func(this.innerHTML);
-  });
+    document.arrive(".userContent p", {existing: true}, function() {
+      this.innerHTML = func(this.innerHTML);
+    });
 
-  console.log('set string converter');
+    document.arrive(".mtm p", {existing: true}, function() {
+      this.innerHTML = func(this.innerHTML);
+    });
+
+    console.log('set string converter');
+  }
 }
 
 function clearConverter() {
@@ -27,32 +32,23 @@ function clearConverter() {
   $(".kkyu-item").remove();
 }
 
-
-var converterFunc = (str) => (str);
-
+// get data from storage
 chrome.storage.sync.get(function(obj) {
-  converterFunc = obj.converters[obj.selectedConverterIndex].func;
-  if (obj.activated) {
-    setConverter(converterFunc);
-  }
+  objectActivated = obj.activated;
+  converterFunc = obj.selectedConverter.func;
+  setConverter();
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   console.log('storage onChanged Listener triggered');
   if (changes['activated']) {
-    if (changes['activated'].newValue) {
-      setConverter(converterFunc);
-    }
-    else {
-      clearConverter();
-    }
+    objectActivated = changes['activated'].newValue;
   }
-  else if (changes['selectedConverterIndex']) {
-    chrome.storage.sync.get(function(obj) {
-      converterFunc = obj.converters[obj.selectedConverterIndex].func;
-      if (obj.activated) {
-        setConverter(converterFunc);
-      }
-    });
+  if (changes['selectedConverter']) {
+    converterFunc = changes['selectedConverter'].newValue.func;
   }
+  else {
+    return;
+  }
+  setConverter(converterFunc);
 });
