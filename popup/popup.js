@@ -16,6 +16,33 @@ var promiseLoadStorage = new Promise(function(resolve, reject) {
 })
 
 promiseLoadStorage.then(function(value) {
+  Vue.component('add-converter', {
+    template: '#add-converter-template',
+    data: function() {
+      return {
+        errorMessage: '',
+        converterName: '',
+        converterPrefix: '',
+        converterSuffix: ''
+      }
+    },
+    methods: {
+      onAddButtonClick: function() {
+        if (this.converterName.length === 0) {
+          this.errorMessage = "버튼에 들어갈 이름을 입력해주세요";
+          return;
+        }
+        else if (this.converterName.length > 10) {
+          this.errorMessage = "버튼에 들어갈 이름은 10자 이내로 설정해주세요";
+          return;
+        }
+
+        this.errorMessage = '';
+        this.$emit('addconverter');
+      }
+    }
+  })
+
   var vm = new Vue({
     el: '#app',
     data: {
@@ -41,6 +68,9 @@ promiseLoadStorage.then(function(value) {
       },
       onMove: function(evt, originalEvent) {
         chrome.storage.sync.set({converters: this.converters});
+      },
+      addConverter: function() {
+        console.log('add item'); // TODO
       }
     }
   });

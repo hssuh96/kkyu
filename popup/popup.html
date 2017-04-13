@@ -1,21 +1,39 @@
 <html>
+
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="popup.css">
+
+  <script type="text/x-template" id="add-converter-template">
+    '<div>
+      <input v-model="converterName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input>
+      <span style="color:red; font-size:50%">{{errorMessage}}</span>
+      <input v-model="converterPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input>
+      <input v-model="converterSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input>
+      <p>{{converterPrefix}} 예시 문구입니다. {{converterSuffix}}</p>
+      <button type="button" v-on:click="onAddButtonClick">추가</button>
+    </div>'
+  </script>
 </head>
+
 <body>
-<div id="app">
-  <span>For debugging: {{selectedConverter.name}}</span>
-  <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
-  <draggable v-model="converters" :options="options" :move="onMove">
-    <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">{{converter.name}}</button>
-  </draggable>
-</div>
-<script src="../libs/jquery-3.1.1.min.js"></script>
-<script src="../libs/vue.js"></script>
-<script src="../libs/Sortable.min.js"></script>
-<script src="../libs/vuedraggable.min.js"></script>
-<script src="../default_storage.js"></script>
-<script src="popup.js"></script>
+  <div id="app">
+    <span>For debugging: {{selectedConverter.name}}</span>
+    <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
+    <draggable v-model="converters" :options="options" :move="onMove">
+      <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">
+        {{converter.name}}
+      </button>
+    </draggable>
+    <add-converter v-on:addconverter="addConverter"></add-converter>
+  </div>
+
+  <script src="../libs/jquery-3.1.1.min.js"></script>
+  <script src="../libs/vue.js"></script>
+  <script src="../libs/Sortable.min.js"></script>
+  <script src="../libs/vuedraggable.min.js"></script>
+  <script src="../default_storage.js"></script>
+  <script src="popup.js"></script>
 </body>
+
 </html>

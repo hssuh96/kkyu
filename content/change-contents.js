@@ -47,7 +47,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   if (changes['selectedConverter']) {
     converterFunc = changes['selectedConverter'].newValue.func;
   }
-  else {
+  if (changes['converters']) {
     return;
   }
   setConverter(converterFunc);
