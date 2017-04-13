@@ -72,6 +72,10 @@ promiseLoadStorage.then(function(value) {
         this.selectedConverter = $.extend(true, {}, converter);
         chrome.storage.sync.set({selectedConverter: this.selectedConverter});
       },
+      deleteItem: function(index) {
+        this.converters.splice(index, 1);
+        chrome.storage.sync.set({converters: this.converters});
+      },
       onActivateButtonClick: function() {
         this.activated = !this.activated;
         chrome.storage.sync.set({activated: this.activated});

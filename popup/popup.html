@@ -21,8 +21,9 @@
     <span>For debugging: {{selectedConverter.name}}</span>
     <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
     <draggable v-model="converters" :options="options" :move="onMove">
-      <div class="converter-item" v-for="converter in converters">
-        <button type="button" v-on:click="onItemClick(converter)">{{converter.name}}</button>
+      <div class="converter-item" v-for="(converter, index) in converters">
+        <button type="button" v-on:click="onItemClick(converter)" style="width:100px;">{{converter.name}}</button>
+        <button type="button" v-on:click="deleteItem(index)" style="color:red; width:40px;">삭제</button>
       </div>
     </draggable>
     <add-converter v-on:addconverter="addConverter"></add-converter>
