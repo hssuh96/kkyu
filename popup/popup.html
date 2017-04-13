@@ -21,9 +21,9 @@
     <span>For debugging: {{selectedConverter.name}}</span>
     <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
     <draggable v-model="converters" :options="options" :move="onMove">
-      <button type="button" v-for="converter in converters" v-on:click="onItemClick(converter)">
-        {{converter.name}}
-      </button>
+      <div class="converter-item" v-for="converter in converters">
+        <button type="button" v-on:click="onItemClick(converter)">{{converter.name}}</button>
+      </div>
     </draggable>
     <add-converter v-on:addconverter="addConverter"></add-converter>
   </div>

@@ -33,12 +33,22 @@ promiseLoadStorage.then(function(value) {
           return;
         }
         else if (this.converterName.length > 10) {
-          this.errorMessage = "버튼에 들어갈 이름은 10자 이내로 설정해주세요";
+          this.errorMessage = "버튼에 들어갈 이름은 10자 이내로 입력해주세요";
           return;
         }
+        prefix = (this.converterPrefix) ? '\'<span class="kkyu-item">' + this.converterPrefix + ' </span>\'' : '\'\'';
+        suffix = (this.converterSuffix) ? '\'<span class="kkyu-item"> ' + this.converterSuffix + '</span>\'' : '\'\'';
+        func = '(str) => (' + prefix + '+str+' + suffix + ')';
+        converter = {
+          name: this.converterName,
+          func: func
+        };
+        this.$emit('addconverter', converter);
 
         this.errorMessage = '';
-        this.$emit('addconverter');
+        this.converterName = '';
+        this.converterPrefix = '';
+        this.converterSuffix = '';
       }
     }
   })
@@ -59,7 +69,7 @@ promiseLoadStorage.then(function(value) {
     },
     methods: {
       onItemClick: function(converter) {
-        this.selectedConverter = $.extend(true, {}, converter);;
+        this.selectedConverter = $.extend(true, {}, converter);
         chrome.storage.sync.set({selectedConverter: this.selectedConverter});
       },
       onActivateButtonClick: function() {
@@ -69,8 +79,10 @@ promiseLoadStorage.then(function(value) {
       onMove: function(evt, originalEvent) {
         chrome.storage.sync.set({converters: this.converters});
       },
-      addConverter: function() {
-        console.log('add item'); // TODO
+      addConverter: function(converter) {
+        console.log('add item: ' + converter.func);
+        this.converters.push($.extend(true, {}, converter));
+        chrome.storage.sync.set({converters: this.converters});
       }
     }
   });
