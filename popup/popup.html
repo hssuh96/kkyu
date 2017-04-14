@@ -7,10 +7,10 @@
   <script type="text/x-template" id="add-converter-template">
     '<div>
       <input v-model="converterName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input>
-      <span style="color:red; font-size:50%">{{errorMessage}}</span>
+      <p v-if="errorMessage" style="color:red; font-size:50%">{{errorMessage}}</p>
       <input v-model="converterPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input>
       <input v-model="converterSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input>
-      <p>{{converterPrefix}} 예시 문구입니다. {{converterSuffix}}</p>
+      <p>{{sampleText}}</p>
       <button type="button" v-on:click="onAddButtonClick">추가</button>
     </div>'
   </script>
@@ -18,12 +18,14 @@
 
 <body>
   <div id="app">
-    <span>For debugging: {{selectedConverter.name}}</span>
+    <transition name="fade">
+      <span v-if="activated">현재 사용중: {{selectedConverter.name}}</span>
+    </transition>
     <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
     <draggable v-model="converters" :options="options">
       <div class="converter-item" v-for="(converter, index) in converters">
         <button type="button" v-on:click="onItemClick(converter)" style="width:100px;">{{converter.name}}</button>
-        <button type="button" v-on:click="deleteItem(index)" style="color:red; width:40px;">삭제</button>
+        <button class="deleteButton" type="button" v-on:click="deleteItem(index)" style="color:red; width:40px;">삭제</button>
       </div>
     </draggable>
     <add-converter v-on:addconverter="addConverter"></add-converter>

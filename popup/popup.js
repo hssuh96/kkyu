@@ -28,6 +28,11 @@ promiseLoadStorage.then(function(value) {
         converterSuffix: ''
       }
     },
+    computed: {
+      sampleText: function() {
+        return this.converterPrefix + ' 예시 문구입니다. ' + this.converterSuffix;
+      }
+    },
     methods: {
       onAddButtonClick: function() {
         if (this.converterName.length === 0) {

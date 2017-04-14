@@ -1,5 +1,13 @@
-button{
+button {
+  font-size: 100%;
   width: 150px;
   background-color: white;
-  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
 }
