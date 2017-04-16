@@ -11,15 +11,15 @@ function setConverter() {
 
     eval('var func = ' + converterFunc);
 
-    document.arrive(".UFICommentBody", {existing: true}, function() {
+    document.arrive(".UFICommentBody", {existing: true}, function() { // comments
       this.innerHTML = func(this.innerHTML);
     });
 
-    document.arrive(".userContent p", {existing: true}, function() {
+    document.arrive(".userContent p", {existing: true}, function() { // user's posts
       this.innerHTML = func(this.innerHTML);
     });
 
-    document.arrive(".mtm p", {existing: true}, function() {
+    document.arrive(".mtm p", {existing: true}, function() { // shared posts
       this.innerHTML = func(this.innerHTML);
     });
 
