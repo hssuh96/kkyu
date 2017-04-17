@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="popup.css">
 
   <script type="text/x-template" id="add-converter-template">
@@ -26,7 +27,8 @@
       <draggable v-model="converters" :options="options">
         <div class="converter-item" v-for="(converter, index) in converters">
           <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
-          <h3 class="deleteButton" v-on:click="deleteItem(index)">삭제</h3>
+          <i class="editButton glyphicon glyphicon-pencil" aria-hidden="true"></i>
+          <i class="deleteButton glyphicon glyphicon-trash" aria-hidden="true" v-on:click="deleteItem(index)"></i>
         </div>
       </draggable>
       <add-converter v-on:addconverter="addConverter"></add-converter>
