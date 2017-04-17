@@ -69,3 +69,8 @@ body {
 .fade-enter, .fade-leave-to {
   opacity: 0
 }*/
+
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}

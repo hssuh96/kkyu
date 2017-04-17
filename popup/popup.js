@@ -64,6 +64,7 @@ promiseLoadStorage.then(function(value) {
     el: '#app',
     data: {
       options: {
+        ghostClass: 'ghost'
       },
       selectedConverter: storageValue.selectedConverter,
       converters: storageValue.converters
