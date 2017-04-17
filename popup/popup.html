@@ -19,10 +19,8 @@
 
 <body>
   <div id="app">
-    <transition name="fade">
-      <span v-show="activated">현재 사용중: {{selectedConverter.name}}</span>
-    </transition>
-    <div class="big-button activate-button" type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</div>
+    <span>{{activated ? '현재 사용중: ' + selectedConverter.name : '사용 중지됨'}}</span>
+    <div class="big-button deactivate-button" type="button" v-on:click="onDeactivateButtonClick" v-show="activated">사용 중지</div>
     <div class="converters-wrapper">
       <draggable v-model="converters" :options="options">
         <div class="big-button" v-for="(converter, index) in converters">

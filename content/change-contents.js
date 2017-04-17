@@ -1,15 +1,14 @@
 console.log('loading content scripts : change-contents');
 
-var objectActivated = false;
-var converterFunc = (str) => (str);
+var converter = -1;
 
 function setConverter() {
   clearConverter();
 
-  if (objectActivated) {
-    console.log('setting string converter : ' + converterFunc);
+  if (converter !== -1) {
+    console.log('setting string converter : ' + converter.func);
 
-    eval('var func = ' + converterFunc);
+    eval('var func = ' + converter.func);
 
     document.arrive(".UFICommentBody", {existing: true}, function() { // comments
       this.innerHTML = func(this.innerHTML);
@@ -34,21 +33,16 @@ function clearConverter() {
 
 // get data from storage
 chrome.storage.sync.get(function(obj) {
-  objectActivated = obj.activated;
-  converterFunc = obj.selectedConverter.func;
+  converter = JSON.parse(JSON.stringify(obj.selectedConverter));
+  console.log(converter);
   setConverter();
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   console.log('storage onChanged Listener triggered');
-  if (changes['activated']) {
-    objectActivated = changes['activated'].newValue;
-  }
   if (changes['selectedConverter']) {
-    converterFunc = changes['selectedConverter'].newValue.func;
+    converter = JSON.parse(JSON.stringify(changes['selectedConverter'].newValue));
+    console.log(converter);
+    setConverter();
   }
-  if (changes['converters']) {
-    return;
-  }
-  setConverter(converterFunc);
 });

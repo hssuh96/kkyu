@@ -65,13 +65,12 @@ promiseLoadStorage.then(function(value) {
     data: {
       options: {
       },
-      activated: storageValue.activated,
       selectedConverter: storageValue.selectedConverter,
       converters: storageValue.converters
     },
     computed: {
-      activateButtonText: function() {
-        return (this.activated) ? "사용 중지" : "다시 사용";
+      activated: function() {
+        return this.selectedConverter !== -1;
       }
     },
     methods: {
@@ -83,8 +82,8 @@ promiseLoadStorage.then(function(value) {
         newConverters.splice(index, 1);
         this.converters = newConverters;
       },
-      onActivateButtonClick: function() {
-        this.activated = !this.activated;
+      onDeactivateButtonClick: function() {
+        this.selectedConverter = -1;
       },
       addConverter: function(converter) {
         let newConverters = JSON.parse(JSON.stringify(this.converters));
@@ -93,10 +92,6 @@ promiseLoadStorage.then(function(value) {
       }
     },
     watch: {
-      activated: function(newActivated) {
-        console.log('activated changed. syncing with storage');
-        chrome.storage.sync.set({activated: newActivated});
-      },
       selectedConverter: function(newSelectedConverter) {
         console.log('selectedConverter changed. syncing with storage');
         chrome.storage.sync.set({selectedConverter: newSelectedConverter});
