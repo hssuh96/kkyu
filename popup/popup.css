@@ -19,7 +19,9 @@ button {
   width: 100%;
   height: 30px;
   margin: 3px 0px;
+  padding: 4px;
   display: flex;
+  align-items: center;
   border-radius: 5px;
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
@@ -29,35 +31,54 @@ button {
 }
 
 .converter-item:hover {
-  background-color:
+  background-color: #F0F0F0;
 }
 
 .converter-name {
   box-sizing: border-box;
-  width: 70%;
-  height: 100%;
+  width: 110px;
+  height: 20px;
   margin: 0px;
-  padding: 6px;
+  display: flex;
+  align-items: center;
   font-size: 12px;
   font-weight: 700;
 }
 
 .editButton {
   box-sizing: border-box;
-  width: 15%;
-  height: 100%;
+  width: 20px;
+  height: 20px;
   margin: 0px;
-  padding: 6px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
+  border-radius: 3px;
+}
+
+.editButton:hover {
+  background-color: #DCDCDC;
 }
 
 .deleteButton {
   box-sizing: border-box;
-  width: 15%;
-  height: 100%;
+  width: 20px;
+  height: 20px;
   margin: 0px;
-  padding: 6px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
+  border-radius: 3px;
+}
+
+.deleteButton:hover {
+  background-color: #DCDCDC;
 }
 
 .fade-enter-active, .fade-leave-active {
