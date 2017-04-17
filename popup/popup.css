@@ -1,21 +1,14 @@
 body {
   margin: 0px;
-}
-
-button {
-  font-size: 100%;
-  width: 150px;
-  background-color: white;
-  padding: 5px;
-  margin-bottom: 3px;
+  background-color: #E0E0E0;
+  font-size: 12px;
 }
 
 .converters-wrapper {
-  background-color: white;
   padding: 2px;
 }
 
-.converter-item {
+.big-button {
   width: 100%;
   height: 30px;
   margin: 3px 0px;
@@ -30,7 +23,7 @@ button {
   background-color: white;
 }
 
-.converter-item:hover {
+.big-button:hover {
   background-color: #F0F0F0;
 }
 
@@ -45,7 +38,7 @@ button {
   font-weight: 700;
 }
 
-.editButton {
+.small-button {
   box-sizing: border-box;
   width: 20px;
   height: 20px;
@@ -59,26 +52,14 @@ button {
   border-radius: 3px;
 }
 
-.editButton:hover {
-  background-color: #DCDCDC;
+.small-button:hover {
+  background-color: #D3D3D3;
 }
 
-.deleteButton {
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  margin: 0px;
-  top: 0px;
-  bottom: 0px;
-  display: flex;
-  align-items: center;
+.activate-button {
   justify-content: center;
   font-size: 12px;
-  border-radius: 3px;
-}
-
-.deleteButton:hover {
-  background-color: #DCDCDC;
+  font-weight: 700;
 }
 
 .fade-enter-active, .fade-leave-active {

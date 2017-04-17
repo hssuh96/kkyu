@@ -22,13 +22,13 @@
     <transition name="fade">
       <span v-show="activated">현재 사용중: {{selectedConverter.name}}</span>
     </transition>
-    <button type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</button>
+    <div class="big-button activate-button" type="button" v-on:click="onActivateButtonClick">{{activateButtonText}}</div>
     <div class="converters-wrapper">
       <draggable v-model="converters" :options="options">
-        <div class="converter-item" v-for="(converter, index) in converters">
+        <div class="big-button" v-for="(converter, index) in converters">
           <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
-          <i class="editButton glyphicon glyphicon-pencil" aria-hidden="true"></i>
-          <i class="deleteButton glyphicon glyphicon-trash" aria-hidden="true" v-on:click="deleteItem(index)"></i>
+          <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
+          <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
         </div>
       </draggable>
       <add-converter v-on:addconverter="addConverter"></add-converter>
