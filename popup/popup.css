@@ -9,7 +9,7 @@ body {
 }
 
 .big-button {
-  width: 100%;
+  width: 170px;
   height: 30px;
   margin: 3px 0px;
   padding: 4px;
@@ -21,6 +21,7 @@ body {
   border-bottom: 1px solid #bbb;
   border-right: 1px solid #bbb;
   background-color: white;
+  cursor: pointer;
 }
 
 .big-button:hover {
@@ -29,13 +30,15 @@ body {
 
 .converter-name {
   box-sizing: border-box;
-  width: 110px;
+  width: 120px;
   height: 20px;
   margin: 0px;
+  padding-left: 5px;
   display: flex;
   align-items: center;
   font-size: 12px;
   font-weight: 700;
+  overflow: hidden;
 }
 
 .small-button {
@@ -60,6 +63,11 @@ body {
   justify-content: center;
   font-size: 12px;
   font-weight: 700;
+}
+
+input {
+  width: 100%;
+  background-color: #F7EFE2;
 }
 
 /*.fade-enter-active, .fade-leave-active {

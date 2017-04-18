@@ -64,6 +64,7 @@ promiseLoadStorage.then(function(value) {
     el: '#app',
     data: {
       options: {
+        animation: 0,
         forceFallback: true,
         ghostClass: 'ghost'
       },
