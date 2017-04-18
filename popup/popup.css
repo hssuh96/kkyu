@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  background-color: #E0E0E0;
+  background-color: #F7EFE2;
   font-size: 12px;
 }
 
@@ -72,5 +72,5 @@ body {
 
 .ghost {
   opacity: .5;
-  background: #C8EBFB;
+  background: #FDCB68;
 }

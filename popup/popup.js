@@ -64,6 +64,7 @@ promiseLoadStorage.then(function(value) {
     el: '#app',
     data: {
       options: {
+        forceFallback: true,
         ghostClass: 'ghost'
       },
       selectedConverter: storageValue.selectedConverter,
