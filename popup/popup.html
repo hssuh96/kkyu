@@ -20,17 +20,15 @@
 <body>
   <div id="app">
     <span>{{activated ? '현재 사용중: ' + selectedConverter.name : '사용 중지됨'}}</span>
-    <div class="big-button deactivate-button" type="button" v-on:click="onDeactivateButtonClick" v-show="activated">사용 중지</div>
-    <div class="converters-wrapper">
-      <draggable v-model="converters" :options="options">
-        <div class="big-button" v-for="(converter, index) in converters" :key="index">
-          <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
-          <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
-          <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
-        </div>
-      </draggable>
-      <add-converter v-on:addconverter="addConverter"></add-converter>
-    </div>
+    <div class="big-button deactivate-button" type="button" v-on:click="onDeactivateButtonClick">사용 중지</div>
+    <draggable v-model="converters" :options="options">
+      <div class="big-button" v-for="(converter, index) in converters" :key="index">
+        <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
+        <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
+        <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
+      </div>
+    </draggable>
+    <add-converter v-on:addconverter="addConverter"></add-converter>
   </div>
 
   <script src="../libs/jquery-3.1.1.min.js"></script>
