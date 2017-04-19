@@ -4,17 +4,6 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="popup.css">
-
-  <script type="x/template" id="add-converter-template">
-    <div>
-      <input v-model="converterName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input>
-      <p v-if="errorMessage" style="color:red; font-size:50%">{{errorMessage}}</p>
-      <input v-model="converterPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input>
-      <input v-model="converterSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input>
-      <p>{{sampleText}}</p>
-      <button type="button" v-on:click="onAddButtonClick">추가</button>
-    </div>
-  </script>
 </head>
 
 <body>
@@ -29,12 +18,12 @@
           <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
         </div>
         <div class="editingBox" v-if="editingIndex == index" v-mousedown-outside="cancelEdit">
-          <input v-model="editingName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input>
+          <div>이름: <input v-model="editingName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input></div>
           <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
-          <input v-model="editingPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input>
-          <input v-model="editingSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input>
+          <div>앞에: <input v-model="editingPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input></div>
+          <div>뒤에: <input v-model="editingSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input></div>
           <p>{{editingSampleText}}</p>
-          <button type="button" v-on:click="saveItem">저장</button>
+          <button type="button" class="save-button" v-on:click="saveItem">저장</button>
         </div>
       </div>
     </draggable>

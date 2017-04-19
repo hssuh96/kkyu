@@ -6,17 +6,17 @@ converter1 = {
 };
 
 converter2 = {
-  name: '아 오지구요~',
-  func: "(str) => ('<span class=\"kkyu-item\">아 오지구요~ </span>' + str)",
+  name: '급식체',
+  func: "(str) => ('<span class=\"kkyu-item\">아 오지구요~ </span>'+str+'<span class=\"kkyu-item\"> ㅇㅈ? ㅇㅇㅈ~</span>')",
   prefix: '아 오지구요~',
-  suffix: ''
+  suffix: 'ㅇㅈ? ㅇㅇㅈ~'
 };
 
 converter3 = {
-  name: 'ㅇㅈ? ㅇㅇㅈ~',
-  func: "(str) => (str + '<span class=\"kkyu-item\"> ㅇㅈ? ㅇㅇㅈ~</span>')",
-  prefix: '',
-  suffix: 'ㅇㅈ? ㅇㅇㅈ~'
+  name: '휴먼창정체',
+  func: "(str) => ('<span class=\"kkyu-item\">쒸벌,,,,탱,,,ㅎㅎ </span>'+str+'<span class=\"kkyu-item\"> ~~~~~~^^</span>')",
+  prefix: '쒸벌,,,,탱,,,ㅎㅎ',
+  suffix: '~~~~~~^^'
 };
 
 var defaultStorage = {

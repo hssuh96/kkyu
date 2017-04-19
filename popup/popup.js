@@ -1,23 +1,3 @@
-// function funcToPrefixSuffix(func) {
-//   func = func.substring(9);
-//
-//   let indexStr = func.search(/str/);
-//
-//   let index1 = func.search(/<span class="kkyu-item">/);
-//   let index2 = func.search(/<\/span>/);
-//
-//   let prefix = func.substring(index1+24, index2-1);
-//
-//   func = func.substring(index2 + 7);
-//
-//   index1 = func.search(/<span class="kkyu-item">/);
-//   index2 = func.search(/<\/span>/);
-//
-//   let suffix = func.substring(index1+25, index2);
-//
-//   return [prefix, suffix];
-// }
-
 var storageValue = {};
 
 // load data from storage
@@ -54,58 +34,10 @@ Vue.directive('mousedown-outside', {
 });
 
 
-// defining vue component
-Vue.component('add-converter', {
-  template: '#add-converter-template',
-  data: function() {
-    return {
-      errorMessage: '',
-      converterName: '',
-      converterPrefix: '',
-      converterSuffix: ''
-    }
-  },
-  computed: {
-    sampleText: function() {
-      return this.converterPrefix + ' 예시 문구입니다. ' + this.converterSuffix;
-    }
-  },
-  methods: {
-    onAddButtonClick: function() {
-      if (this.converterName.length === 0) {
-        this.errorMessage = "버튼에 들어갈 이름을 입력해주세요";
-        return;
-      }
-      else if (this.converterName.length > 10) {
-        this.errorMessage = "버튼에 들어갈 이름은 10자 이내로 입력해주세요";
-        return;
-      }
-      prefix = (this.converterPrefix) ? '\'<span class="kkyu-item">' + this.converterPrefix + ' </span>\'' : '\'\'';
-      suffix = (this.converterSuffix) ? '\'<span class="kkyu-item"> ' + this.converterSuffix + '</span>\'' : '\'\'';
-      func = '(str) => (' + prefix + '+str+' + suffix + ')';
-      converter = {
-        name: this.converterName,
-        func: func
-      };
-      this.$emit('addconverter', converter);
-
-      this.errorMessage = '';
-      this.converterName = '';
-      this.converterPrefix = '';
-      this.converterSuffix = '';
-    }
-  }
-});
-
 promiseLoadStorage.then(function(value) {
   var vm = new Vue({
     el: '#app',
     data: {
-      options: {
-        animation: 0,
-        forceFallback: true,
-        ghostClass: 'ghost'
-      },
       selectedConverter: storageValue.selectedConverter,
       converters: storageValue.converters,
       editingIndex: -1,
@@ -120,6 +52,14 @@ promiseLoadStorage.then(function(value) {
       },
       editingSampleText: function() {
         return this.editingPrefix + ' 예시 문구입니다. ' + this.editingSuffix;
+      },
+      options: function() {
+        return {
+          animation: 0,
+          forceFallback: true,
+          ghostClass: 'ghost',
+          disabled: (this.editingIndex !== -1)
+        };
       }
     },
     methods: {

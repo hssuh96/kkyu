@@ -40,6 +40,7 @@ body {
   font-size: 12px;
   font-weight: 700;
   overflow: hidden;
+  user-select: none;
 }
 
 .small-button {
@@ -67,12 +68,32 @@ body {
 }
 
 input {
-  width: 100%;
+  width: 120px;
   background-color: #F7EFE2;
 }
 
 .editingBox {
   display: inline-block;
+}
+
+.save-button {
+  box-sizing: border-box;
+  width: 40px;
+  height: 20px;
+  margin: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border-radius: 3px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  background-color: white;
+  cursor: pointer;
 }
 
 /*.fade-enter-active, .fade-leave-active {
