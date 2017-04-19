@@ -5,6 +5,10 @@ body {
   font-size: 12px;
 }
 
+.converter-item {
+  display: inline-block;
+}
+
 .big-button {
   width: 170px;
   height: 30px;
@@ -67,6 +71,10 @@ input {
   background-color: #F7EFE2;
 }
 
+.editingBox {
+  display: inline-block;
+}
+
 /*.fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
@@ -76,6 +84,5 @@ input {
 }*/
 
 .ghost {
-  opacity: .5;
-  background: #FDCB68;
+  visibility: hidden;
 }
