@@ -23,12 +23,14 @@
             <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
             <i class="glyphicon glyphicon-trash small-button" aria-hidden="true"></i>
           </div>
-          <div>이름: <input v-model="editingName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input></div>
           <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
           <div>앞에: <input v-model="editingPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input></div>
           <div>뒤에: <input v-model="editingSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input></div>
           <p>{{editingSampleText}}</p>
-          <button type="button" class="save-button" v-on:click="saveItem">저장</button>
+          <div class="editing-footer">
+            <button type="button" class="save-button" v-on:click="cancelEdit">취소</button>
+            <button type="button" class="save-button" v-on:click="saveItem">저장</button>
+          </div>
         </div>
       </div>
     </draggable>

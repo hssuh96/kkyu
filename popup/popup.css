@@ -87,6 +87,11 @@ input {
   border-style: none;
 }
 
+.editing-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .save-button {
   box-sizing: border-box;
   width: 40px;
