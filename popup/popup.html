@@ -9,15 +9,20 @@
 <body>
   <div id="app">
     <span>{{activated ? '현재 사용중: ' + selectedConverter.name : '사용 중지됨'}}</span>
-    <div class="big-button deactivate-button" type="button" v-on:click="onDeactivateButtonClick">사용 중지</div>
+    <div class="big-button action-button" type="button" v-on:click="onDeactivateButtonClick">사용 중지</div>
     <draggable v-model="converters" :options="options">
       <div class="converter-item" v-for="(converter, index) in converters" :key="index">
-        <div class="big-button">
+        <div class="big-button" v-if="editingIndex !== index">
           <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
           <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true" v-on:click="editItem(index)"></i>
           <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
         </div>
-        <div class="editingBox" v-if="editingIndex == index" v-mousedown-outside="cancelEdit">
+        <div class="editingBox" v-if="editingIndex === index" v-mousedown-outside="cancelEdit">
+          <div class="big-button editing-button">
+            <input v-model="editingName" class="converter-name" v-focus></input>
+            <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
+            <i class="glyphicon glyphicon-trash small-button" aria-hidden="true"></i>
+          </div>
           <div>이름: <input v-model="editingName" placeholder="버튼에 들어갈 이름을 입력해주세요"></input></div>
           <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
           <div>앞에: <input v-model="editingPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input></div>
@@ -27,7 +32,7 @@
         </div>
       </div>
     </draggable>
-    <button type="button" v-on:click="addItem">추가</button>
+    <span class="big-button action-button" type="button" v-on:click="addItem">추가</span>
   </div>
 
   <script src="../libs/jquery-3.1.1.min.js"></script>

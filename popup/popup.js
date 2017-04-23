@@ -33,6 +33,15 @@ Vue.directive('mousedown-outside', {
   },
 });
 
+Vue.directive('focus', {
+  // When the bound element is inserted into the DOM...
+  inserted: function (el) {
+    // Focus the element
+    el.focus()
+    el.select()
+  }
+})
+
 
 promiseLoadStorage.then(function(value) {
   var vm = new Vue({
