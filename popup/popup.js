@@ -18,21 +18,6 @@ var promiseLoadStorage = new Promise(function(resolve, reject) {
 });
 
 
-// defining vue directive
-Vue.directive('mousedown-outside', {
-  bind: function (el, binding, vnode) {
-    this.mousedownOutsideListener = function (event) {
-      if (!(el == event.target || el.contains(event.target))) {
-        vnode.context[binding.expression](event);
-      }
-    };
-    document.body.addEventListener('mousedown', this.mousedownOutsideListener)
-  },
-  unbind: function (el) {
-    document.body.removeEventListener('mousedown', this.mousedownOutsideListener)
-  },
-});
-
 Vue.directive('focus', {
   // When the bound element is inserted into the DOM...
   inserted: function (el) {
@@ -143,6 +128,13 @@ promiseLoadStorage.then(function(value) {
         });
         this.converters = newConverters;
         this.editingIndex = this.converters.length - 1;
+      },
+      mouseDownOutsideEditingBoxListener: function(event) {
+        console.log('mouseDownOutsideEditingBoxListener called');
+        if (!($(".editing-button")[0] == event.target || $(".editing-button")[0].contains(event.target) ||
+        $(".editing-box")[0] == event.target || $(".editing-box")[0].contains(event.target))) {
+          this.cancelEdit();
+        }
       }
     },
     watch: {
@@ -153,6 +145,14 @@ promiseLoadStorage.then(function(value) {
       converters: function(newConverters) {
         console.log('converters changed. syncing with storage');
         chrome.storage.sync.set({converters: newConverters});
+      },
+      editingIndex: function(val, oldVal) {
+        if (oldVal !== -1) {
+          document.body.removeEventListener('mousedown', this.mouseDownOutsideEditingBoxListener);
+        }
+        if (val !== -1) {
+          document.body.addEventListener('mousedown', this.mouseDownOutsideEditingBoxListener);
+        }
       }
     }
   });

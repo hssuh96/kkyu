@@ -73,7 +73,7 @@ input {
   outline:none;
 }
 
-.editingBox {
+.editing-box {
   display: inline-block;
 }
 
@@ -112,13 +112,13 @@ input {
   cursor: pointer;
 }
 
-/*.fade-enter-active, .fade-leave-active {
+.editingbox-open-enter-active {
   transition: opacity .5s
 }
 
-.fade-enter, .fade-leave-to {
+.editingbox-open-enter {
   opacity: 0
-}*/
+}
 
 .ghost .big-button {
   opacity: .5;
