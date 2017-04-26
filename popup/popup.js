@@ -44,9 +44,6 @@ promiseLoadStorage.then(function(value) {
       activated: function() {
         return this.selectedConverter !== -1;
       },
-      editingSampleText: function() {
-        return this.editingPrefix + ' 예시 문구입니다. ' + this.editingSuffix;
-      },
       options: function() {
         return {
           animation: 0,

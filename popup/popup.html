@@ -4,46 +4,55 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="../libs/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="popup.css">
-</head>
-
-<body>
-  <div id="app">
-    <span>{{activated ? '현재 사용중: ' + selectedConverter.name : '사용 중지됨'}}</span>
-    <div class="big-button action-button" type="button" v-on:click="onDeactivateButtonClick">사용 중지</div>
-    <draggable v-model="converters" :options="options">
-      <div class="converter-item" v-for="(converter, index) in converters" :key="index">
-        <div class="big-button" v-if="editingIndex !== index">
-          <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
-          <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true" v-on:click="editItem(index)"></i>
-          <i class="glyphicon glyphicon-trash small-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
-        </div>
-        <div class="big-button editing-button" v-else>
-          <input v-model="editingName" class="converter-name" v-focus></input>
-          <i class="glyphicon glyphicon-pencil small-button" aria-hidden="true"></i>
-          <i class="glyphicon glyphicon-trash small-button" aria-hidden="true"></i>
-        </div>
-        <transition name="editingbox-open">
-          <div class="editing-box" v-if="editingIndex === index">
-            <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
-            <div>앞에: <input v-model="editingPrefix" placeholder="앞에 들어갈 문구를 입력해주세요"></input></div>
-            <div>뒤에: <input v-model="editingSuffix" placeholder="뒤에 들어갈 문구를 입력해주세요"></input></div>
-            <p>{{editingSampleText}}</p>
-            <div class="editing-footer">
-              <button type="button" class="save-button" v-on:click="cancelEdit">취소</button>
-              <button type="button" class="save-button" v-on:click="saveItem">저장</button>
-            </div>
-          </div>
-        </transition>
-      </div>
-    </draggable>
-    <span class="big-button action-button" type="button" v-on:click="addItem">추가</span>
-  </div>
 
   <script src="../libs/jquery-3.1.1.min.js"></script>
   <script src="../libs/vue.js"></script>
   <script src="../libs/Sortable.min.js"></script>
   <script src="../libs/vuedraggable.min.js"></script>
   <script src="../default_storage.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="status-bar">
+      {{activated ? selectedConverter.name : '아무것도 안하는 중...'}}
+    </div>
+
+    <hr id="hr-1">
+
+    <div class="big-button action-button" type="button" v-on:click="onDeactivateButtonClick">아무것도 안하기</div>
+    <draggable v-model="converters" :options="options">
+      <div class="converter-item" v-for="(converter, index) in converters" :key="index">
+        <div class="big-button" v-if="editingIndex !== index">
+          <h3 class="converter-name" v-on:click="onItemClick(converter)">{{converter.name}}</h3>
+          <i class="glyphicon glyphicon-pencil icon-button" aria-hidden="true" v-on:click="editItem(index)"></i>
+          <i class="glyphicon glyphicon-trash icon-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
+        </div>
+        <div class="big-button editing-button" v-else>
+          <input v-model="editingName" class="converter-name" v-focus></input>
+          <i class="glyphicon glyphicon-pencil icon-button" aria-hidden="true"></i>
+          <i class="glyphicon glyphicon-trash icon-button" aria-hidden="true"></i>
+        </div>
+        <div class="editing-box-wrapper" v-if="editingIndex === index">
+          <div class="editing-box">
+            <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
+            <h4>앞에 </h4>
+            <textarea v-model="editingPrefix" placeholder="앞에 들어갈 문구"></textarea>
+            <h4>뒤에 </h4>
+            <textarea v-model="editingSuffix" placeholder="뒤에 들어갈 문구"></textarea>
+            <p>{{editingPrefix}} 예시 문구입니다. {{editingSuffix}}</p>
+            <div class="save-button" v-on:click="saveItem">저장</div>
+            <i class="glyphicon glyphicon-remove cancel-icon" aria-hidden="true" v-on:click="cancelEdit"></i>
+          </div>
+        </div>
+      </div>
+    </draggable>
+
+    <hr id="hr-2">
+
+    <span class="big-button action-button" type="button" v-on:click="addItem">추가</span>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 
