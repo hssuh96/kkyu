@@ -2,7 +2,14 @@
   "manifest_version": 2,
 
   "name": "뀨!",
-  "version": "0.2.0",
+  "version": "1.0.0",
+  "description": "페이스북의 모든 글/댓글의 뒤에 뀨!를 붙여줍니다. 원하는 문구로 만들 수도 있습니다 :)",
+
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
 
   "background": {
     "scripts": ["default_storage.js", "background/background.js"],
@@ -10,7 +17,11 @@
   },
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png"
+    },
     "default_popup": "popup/popup.html"
   },
 
