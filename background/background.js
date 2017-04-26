@@ -24,9 +24,3 @@ chrome.webNavigation.onDOMContentLoaded.addListener(function(details) {
     {hostContains: 'www.facebook.com'}
   ]
 });
-
-chrome.runtime.onInstalled.addListener(function(details) {
-  if (details.previousVersion < '0.1.0') {
-    alert('뀨! 확장 프로그램이 업데이트되었습니다. 이전 버전과의 충돌로 정상적으로 작동되지 않을 수 있으니 오류 발생 시 삭제 후 다시 설치해주시기 바랍니다.');
-  }
-})

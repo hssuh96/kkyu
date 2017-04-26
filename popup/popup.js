@@ -146,7 +146,6 @@ promiseLoadStorage.then(function(value) {
         this.editingIndex = this.converters.length - 1;
       },
       mouseDownOutsideEditingBoxListener: function(event) {
-        console.log('mouseDownOutsideEditingBoxListener called');
         if (!($(".editing-button")[0] == event.target || $(".editing-button")[0].contains(event.target) ||
         $(".editing-box")[0] == event.target || $(".editing-box")[0].contains(event.target))) {
           this.cancelEdit();
