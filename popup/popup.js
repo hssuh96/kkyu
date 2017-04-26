@@ -1,3 +1,22 @@
+// code for making prefix, suffix html-safe
+var entityMap = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+  '/': '&#x2F;',
+  '`': '&#x60;',
+  '=': '&#x3D;'
+};
+
+function escapeHtml(string) {
+  return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+    return entityMap[s];
+  });
+}
+
+
 var storageValue = {};
 
 // load data from storage
@@ -96,8 +115,8 @@ promiseLoadStorage.then(function(value) {
           return;
         }
 
-        var funcPrefix = (this.editingPrefix) ? '\'<span class="kkyu-item">' + this.editingPrefix + ' </span>\'+' : '';
-        var funcSuffix = (this.editingSuffix) ? '+\'<span class="kkyu-item"> ' + this.editingSuffix + '</span>\'' : '';
+        var funcPrefix = (this.editingPrefix) ? '\'<span class="kkyu-item">' + escapeHtml(this.editingPrefix) + ' </span>\'+' : '';
+        var funcSuffix = (this.editingSuffix) ? '+\'<span class="kkyu-item"> ' + escapeHtml(this.editingSuffix) + '</span>\'' : '';
         var func = '(str) => (' + funcPrefix + 'str' + funcSuffix + ')';
 
         let newConverters = JSON.parse(JSON.stringify(this.converters));
