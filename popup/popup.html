@@ -21,6 +21,7 @@
     <hr id="hr-1">
 
     <div class="big-button action-button" type="button" v-on:click="onDeactivateButtonClick">아무것도 안하기</div>
+
     <draggable v-model="converters" :options="options">
       <div class="converter-item" v-for="(converter, index) in converters" :key="index">
         <div class="big-button" v-if="editingIndex !== index">
@@ -29,7 +30,7 @@
           <i class="glyphicon glyphicon-trash icon-button" aria-hidden="true" v-on:click="deleteItem(index)"></i>
         </div>
         <div class="big-button editing-button" v-else>
-          <input v-model="editingName" class="converter-name" v-focus></input>
+          <input v-model="editingName" class="converter-name" spellcheck="false" v-focus></input>
           <i class="glyphicon glyphicon-pencil icon-button" aria-hidden="true"></i>
           <i class="glyphicon glyphicon-trash icon-button" aria-hidden="true"></i>
         </div>
@@ -37,9 +38,9 @@
           <div class="editing-box">
             <p v-if="editErrorMessage" style="color:red; font-size:50%">{{editErrorMessage}}</p>
             <h4>앞에 </h4>
-            <textarea v-model="editingPrefix" placeholder="앞에 들어갈 문구"></textarea>
+            <textarea v-model="editingPrefix" placeholder="앞에 들어갈 문구" spellcheck="false"></textarea>
             <h4>뒤에 </h4>
-            <textarea v-model="editingSuffix" placeholder="뒤에 들어갈 문구"></textarea>
+            <textarea v-model="editingSuffix" placeholder="뒤에 들어갈 문구" spellcheck="false"></textarea>
             <p>{{editingPrefix}} 예시 문구입니다. {{editingSuffix}}</p>
             <div class="save-button" v-on:click="saveItem">저장</div>
             <i class="glyphicon glyphicon-remove cancel-icon" aria-hidden="true" v-on:click="cancelEdit"></i>
