@@ -11,6 +11,11 @@ function setConverter() {
     eval('var func = ' + converter.func);
 
     document.arrive(".UFICommentBody", {existing: true}, function() { // comments
+      if ($(this).find(".fss").length !== 0) {
+        // bug found : "See More" option in comment disabled when this function modify HTML
+        // so disable converter for those comments to prevent bug
+        return;
+      }
       this.innerHTML = func(this.innerHTML);
     });
 
